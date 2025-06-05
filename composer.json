@@ -1,6 +1,16 @@
 {
-    "name": "julianweiland/class-variance-authority",
+    "name": "julianweiland/cva-php",
     "description": "PHP clone of class-variance-authority (CVA)",
+    "license": "MIT",
+    "keywords": ["cva", "class-variance-authority", "utility", "css", "php"],
+    "homepage": "https://github.com/yourusername/cva-php",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yourusername/cva-php.git"
+    },
+    "require": {
+        "php": "^8.1"
+    },
     "autoload": {
         "psr-4": {
             "CvaPhp\\": "src/"
