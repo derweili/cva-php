@@ -5,7 +5,7 @@ A PHP clone of the [class-variance-authority (CVA)](https://github.com/joe-bell/
 ## Installation
 
 ```bash
-composer require julianweiland/class-variance-authority
+composer require derweili/cva-php
 ```
 
 ## Usage
@@ -44,16 +44,16 @@ $button = Cva::cva('button', [
             'large' => 'button--large',
         ],
     ],
-    'defaultVariants' => [
-        'intent' => 'primary',
-        'size' => 'small',
-    ],
     'compoundVariants' => [
         [
             'intent' => 'primary',
             'size' => 'large',
             'class' => 'button--primary-large',
         ],
+    ],
+    'defaultVariants' => [
+        'intent' => 'primary',
+        'size' => 'small',
     ],
 ]);
 

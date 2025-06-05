@@ -1,12 +1,12 @@
 {
-    "name": "julianweiland/cva-php",
+    "name": "derweili/cva-php",
     "description": "PHP clone of class-variance-authority (CVA)",
     "license": "MIT",
     "keywords": ["cva", "class-variance-authority", "utility", "css", "php"],
-    "homepage": "https://github.com/yourusername/cva-php",
+    "homepage": "https://github.com/derweili/cva-php",
     "repository": {
         "type": "git",
-        "url": "https://github.com/yourusername/cva-php.git"
+        "url": "https://github.com/derweili/cva-php.git"
     },
     "require": {
         "php": "^8.1"
@@ -22,9 +22,17 @@
         }
     ],
     "require-dev": {
-        "phpunit/phpunit": "^12.1"
+        "phpunit/phpunit": "^12.1",
+        "10up/phpcs-composer": "^3.0"
     },
     "scripts": {
-        "test": "phpunit --testdox"
+        "test": "phpunit --testdox",
+        "lint": "./vendor/bin/phpcs --standard=./phpcs.xml",
+        "lint-fix": "./vendor/bin/phpcbf --standard=./phpcs.xml"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }
