@@ -12,28 +12,29 @@ class Cva
             $defaultVariants = $config['defaultVariants'] ?? [];
             $compoundVariants = $config['compoundVariants'] ?? [];
 
+            // Merge defaultVariants with props (props take precedence)
+            $mergedProps = array_merge($defaultVariants, $props ?? []);
+
             // If no variants, just join base, class, className
             if ($variants === null) {
-                return $cx($base, $props['class'] ?? null, $props['className'] ?? null);
+                return $cx($base, $mergedProps['class'] ?? null, $mergedProps['className'] ?? null);
             }
 
             // Compute variant class names
             $getVariantClassNames = [];
             foreach ($variants as $variant => $variantOptions) {
-                $variantProp = $props[$variant] ?? null;
-                $defaultVariantProp = $defaultVariants[$variant] ?? null;
-                if ($variantProp === null) {
+                $variantValue = $mergedProps[$variant] ?? null;
+                if ($variantValue === null) {
                     continue;
                 }
-                $variantKey = ($variantProp !== null && $variantProp !== '') ? $variantProp : $defaultVariantProp;
-                if ($variantKey !== null && isset($variantOptions[$variantKey])) {
-                    $getVariantClassNames[] = $variantOptions[$variantKey];
+                if (isset($variantOptions[$variantValue])) {
+                    $getVariantClassNames[] = $variantOptions[$variantValue];
                 }
             }
 
             // Remove undefined (null) props for compoundVariants
             $propsWithoutUndefined = [];
-            foreach ($props as $key => $value) {
+            foreach ($mergedProps as $key => $value) {
                 if ($value !== null) {
                     $propsWithoutUndefined[$key] = $value;
                 }
@@ -49,7 +50,7 @@ class Cva
                 unset($compoundVariantOptions['class'], $compoundVariantOptions['className']);
                 $allMatch = true;
                 foreach ($compoundVariantOptions as $key => $value) {
-                    $actual = $propsWithoutUndefined[$key] ?? ($defaultVariants[$key] ?? null);
+                    $actual = $propsWithoutUndefined[$key] ?? null;
                     if (is_array($value)) {
                         if (!in_array($actual, $value, true)) {
                             $allMatch = false;
@@ -72,8 +73,8 @@ class Cva
                 $base,
                 $getVariantClassNames,
                 $getCompoundVariantClassNames,
-                $props['class'] ?? null,
-                $props['className'] ?? null
+                $mergedProps['class'] ?? null,
+                $mergedProps['className'] ?? null
             );
         };
     }
