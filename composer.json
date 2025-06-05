@@ -1,0 +1,17 @@
+{
+    "name": "julianweiland/class-variance-authority",
+    "description": "PHP clone of class-variance-authority (CVA)",
+    "autoload": {
+        "psr-4": {
+            "CvaPhp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Julian Weiland"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^12.1"
+    }
+}
