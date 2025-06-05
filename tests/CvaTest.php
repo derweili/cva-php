@@ -139,7 +139,34 @@ class CvaTest extends TestCase
         $this->assertSame('button--primary button--large button--primary-large', $button(['intent' => 'primary', 'size' => 'large']));
         $this->assertSame('button--secondary button--small button--secondary-small', $button(['intent' => 'secondary', 'size' => 'small']));
     }
-    public function testCompoundVariantsWithArray() {}
+    public function testCompoundVariantsWithArray() {
+        $button = Cva::cva(null, [
+            'variants' => [
+                'intent' => [
+                    'primary' => 'button--primary',
+                    'secondary' => 'button--secondary',
+                ],
+                'size' => [
+                    'small' => 'button--small',
+                    'medium' => 'button--medium',
+                ],
+            ],
+            'compoundVariants' => [
+                [
+                    'intent' => 'primary',
+                    'size' => 'medium',
+                    'class' => ['button--primary-medium', 'uppercase'],
+                ],
+                [
+                    'intent' => 'secondary',
+                    'size' => 'small',
+                    'class' => ['button--secondary-small', 'lowercase'],
+                ],
+            ],
+        ]);
+        $this->assertSame('button--primary button--medium button--primary-medium uppercase', $button(['intent' => 'primary', 'size' => 'medium']));
+        $this->assertSame('button--secondary button--small button--secondary-small lowercase', $button(['intent' => 'secondary', 'size' => 'small']));
+    }
     public function testCompoundVariantsWithClassNameArray() {
         $button = Cva::cva(null, [
             'variants' => [
