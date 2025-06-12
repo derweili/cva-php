@@ -8,6 +8,7 @@
         "type": "git",
         "url": "https://github.com/derweili/cva-php.git"
     },
+    "version": "0.1.0",
     "require": {
         "php": "^8.1"
     },
